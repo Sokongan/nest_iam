@@ -1,0 +1,41 @@
+services:
+  bff-postgres:
+      container_name: bff-postgres
+      image: postgres:15.2
+      restart: unless-stopped
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      volumes:
+        - bff-postgres-data:/var/lib/postgresql/data
+        - ./postgres:/docker-entrypoint-initdb.d/
+      networks:
+        - internal
+
+  redis:
+    container_name: bff-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass","1cts@sd"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "1cts@sd", "ping"]
+      interval: 5s
+      retries: 5
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  bff-postgres-data:
