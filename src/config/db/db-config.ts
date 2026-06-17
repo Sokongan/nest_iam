@@ -2,7 +2,7 @@ import { Global, Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Pool } from "pg";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import * as schema  from "../../database/schema";
+import * as schema from "../../database/schema";
 
 
 export const DRIZZLE = Symbol("drizzle-connection");
@@ -10,18 +10,18 @@ export const DRIZZLE = Symbol("drizzle-connection");
 @Module({
     providers: [
         {
-            provide: DRIZZLE, 
+            provide: DRIZZLE,
             inject: [ConfigService],
             useFactory: async (configService: ConfigService) => {
                 const connectionString = configService.get<string>("DATABASE_URL");
                 const pool = new Pool({
                     connectionString,
                 });
-                await pool.connect();
-                return drizzle(pool,{schema}) as NodePgDatabase<typeof schema>;
+                await pool.query("SELECT 1");
+                return drizzle(pool, { schema }) as NodePgDatabase<typeof schema>;
             }
         }
     ],
     exports: [DRIZZLE]
 })
-export class DbConfigurationModule {}
+export class DbConfigModule { }

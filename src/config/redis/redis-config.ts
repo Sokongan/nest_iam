@@ -13,7 +13,7 @@ export const REDIS = Symbol("redis-connection");
         configService: ConfigService,
       ): Promise<RedisClientType> => {
         const client = createClient({
-          url: configService.getOrThrow<string>("REDIS_URL"),
+          url: configService.get<string>("REDIS_URL"),
         });
 
         client.on("error", (err) => {
@@ -21,11 +21,10 @@ export const REDIS = Symbol("redis-connection");
         });
 
         await client.connect();
-
         return client;
       },
     },
   ],
   exports: [REDIS],
 })
-export class RedisConfigurationModule {}
+export class RedisConfigModule {}
