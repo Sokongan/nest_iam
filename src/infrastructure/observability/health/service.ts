@@ -10,7 +10,7 @@ import { ProviderConfig, UrlBuilder } from "../../../common/helpers/url-builder"
 import { PROVIDER_HEALTH } from "../../../common/constant/routes";
 import { AuthenticationConfigService } from "../../modules/config/authentication/authentication-module";
 import { AuthorizationConfigService } from "../../modules/config/authorization/authorize-module";
-import { OauthConfigService } from "../../modules/config/oauth/oauth-module";
+import { OauthConfigService } from "../../modules/iam/oauth/oauth-module";
 
 
 @Injectable()

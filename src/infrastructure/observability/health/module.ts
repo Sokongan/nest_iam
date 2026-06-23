@@ -4,7 +4,7 @@ import { HealthController } from "./controller";
 import { HealthService } from "./service";
 import { AuthenticationConfigModule, AuthenticationConfigService,  } from "../../modules/config/authentication/authentication-module";
 import { AuthorizationConfigModule, AuthorizationConfigService, } from "../../modules/config/authorization/authorize-module";
-import { OauthConfigModule, OauthConfigService,  } from "../../modules/config/oauth/oauth-module";
+import { OauthConfigModule, OauthConfigService,  } from "../../modules/iam/oauth/oauth-module";
 import { CommonModule } from "../../../common/helpers/url-builder";
 
 
